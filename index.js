@@ -29,7 +29,7 @@ async function run() {
         // Connect the client to the server	(optional starting in v4.7)
         await client.connect();
         const jobsCollection = client.db('careerCode').collection('jobs')
-
+        const applicationsCollection = client.db('careerCode').collection('applications')
 
 
         app.get('/jobs',async(req,res)=>{
@@ -44,6 +44,11 @@ async function run() {
             res.send(result)
         })
 
+        app.post('/applications', async(req,res)=>{
+          const application = req.body;
+          const result = await applicationsCollection.insertOne(application)
+          res.send(result)
+        })
 
 
 
